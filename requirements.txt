@@ -1,6 +1,8 @@
-openai
-fastapi
+openai~=0.25.0
+fastapi~=0.88.0
 jinja2
-uvicorn
-marked
-boto3
+uvicorn~=0.20.0
+marked~=0.9.1
+boto3~=1.26.41
+requests~=2.28.1
+starlette~=0.22.0
