@@ -1,0 +1,5 @@
+openai
+fastapi
+jinja2
+uvicorn
+marked

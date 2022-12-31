@@ -1,0 +1,45 @@
+<html lang="en">
+<head>
+    <title>GPT-3 Chat</title>
+    <link href="/static/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+<h1>GPT-3 Chat</h1>
+<form id="form">
+    <label for="prompt">Enter your message:</label><br>
+    <input id="prompt" placeholder="Enter a prompt" type="text">
+    <input id="max_tokens" placeholder="Enter a value for max_tokens" type="text">
+    <input type="submit" value="Submit">
+</form>
+
+<div id="loading">Loading...</div>
+<div id="progress"></div>
+<div id="chatbox"></div>
+
+<script>
+    document.getElementById("loading").style.display = "none";
+    function scrollToBottom() {
+        const chatbox = document.getElementById("chatbox");
+        chatbox.scrollTop = chatbox.scrollHeight;
+    }
+
+    document.getElementById("form").addEventListener("submit", function (event) {
+        event.preventDefault();
+        const prompt = document.getElementById("prompt").value;
+        const max_tokens = document.getElementById("max_tokens").value;
+        document.getElementById("loading").style.display = "block";
+        fetch(`/interface?prompt=${prompt}&max_tokens=${max_tokens}`)
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById("loading").style.display = "none";
+                const chatbox = document.getElementById("chatbox");
+                chatbox.innerHTML += `<p>You: ${prompt}</p><p><img src="/static/img/robot.svg" alt="GPT-3 Icon">GPT-3: ${html}</p>`;
+                scrollToBottom();
+            });
+    });
+</script>
+</body>
+
+
+</html>
