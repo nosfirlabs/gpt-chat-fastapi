@@ -24,7 +24,7 @@ def replace_newlines(text):
 
 
 @app.get("/interface")
-def interface(prompt: str, max_tokens: int, model: str = "davinci"):
+def interface(prompt: str, max_tokens: int, model: str = "text-davinci-002"):
     openai.api_key = ""
     response = openai.Completion.create(
         engine=model,
@@ -43,6 +43,30 @@ def chat(request: Request, response: Response):
     return templates.TemplateResponse("template.html", {
         "request": request
     })
+
+
+@app.post("/set-file-structure")
+def set_file_structure(file_structure: str):
+    """Set the file structure for the OpenAI GPT chat model"""
+    # Save the file structure in a global variable
+    global file_structure_text
+    file_structure_text = file_structure
+
+
+@app.post("/ask-question")
+def ask_question(question: str):
+    """Ask the OpenAI GPT chat model a question using the file structure as context"""
+    # Use the global file structure variable as context for the model
+    prompt = f"{file_structure_text}\n{question}"
+    completions = openai.Completion.create(
+        engine="text-davinci-002",
+        prompt=prompt,
+        max_tokens=1024,
+        n=1,
+        stop=None,
+        temperature=0.5,
+    )
+    return completions.choices[0].text
 
 
 if __name__ == "__main__":
