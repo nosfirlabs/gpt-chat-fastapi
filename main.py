@@ -25,7 +25,7 @@ def replace_newlines(text):
 
 @app.get("/interface")
 def interface(prompt: str, max_tokens: int, model: str = "davinci"):
-    openai.api_key = "YOUR_API_KEY"
+    openai.api_key = ""
     response = openai.Completion.create(
         engine=model,
         prompt=prompt,

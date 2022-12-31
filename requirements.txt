@@ -3,3 +3,4 @@ fastapi
 jinja2
 uvicorn
 marked
+boto3
