@@ -1,4 +1,7 @@
 ![screenshot](https://i.imgur.com/ghYxrOO.png)
+
+### Check out [how to deploy this project](deployment.md).
+
 ## Project Description
 
 This project is a FastAPI app that exposes an interface route where users can talk to the OpenAI GPT-3 language model using the OpenAI API. The app also includes a HTML interface with a chatbox for interacting with GPT-3.
